@@ -11,6 +11,7 @@ public class Tile : ModelBaseClass
     public int Column;
 
     public MemoryBoard Board;
+    public ITileState TileState;
     private int _memoryCardId;
     public int MemoryCardId
     {
@@ -23,6 +24,7 @@ public class Tile : ModelBaseClass
             OnPropertyChanged();
         }
     }
+
 
     public Tile(int row, int column, MemoryBoard board)
     {

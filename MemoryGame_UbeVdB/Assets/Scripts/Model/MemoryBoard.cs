@@ -2,11 +2,12 @@ using Memory.Model;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Memory.Model
 {
 
-
+   
     public class MemoryBoard : ModelBaseClass
     {
         public int Rows;
@@ -93,6 +94,8 @@ namespace Memory.Model
                 }
                 cycleNumber++;
             }
+
+           
 
         }
         private int FindIndexTiles(List<Tile> list1, Tile tile)
