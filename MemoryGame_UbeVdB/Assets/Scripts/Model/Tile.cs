@@ -14,7 +14,19 @@ namespace Memory.Model
         public int Column;
 
         public MemoryBoard Board;
-        public ITileState State;
+        private ITileState _state;
+        public ITileState State
+        {
+            get { return _state; }
+            set
+            {
+                if (_state == value)
+                    return;
+                _state = value;
+                OnPropertyChanged();
+            }
+        }
+
         private int _memoryCardId;
         public int MemoryCardID
         {
@@ -34,6 +46,7 @@ namespace Memory.Model
             Row = row;
             Column = column;
             Board = board;
+            State = new TileHiddenState(this);
         }
 
         public override string ToString()
@@ -43,7 +56,7 @@ namespace Memory.Model
 
         public void SetState(ITileState state)
         {
-
+            State = state;
         }
 
 

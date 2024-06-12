@@ -9,6 +9,7 @@ namespace Memory.Model.States
 {
     public class BoardOnePreviewState : BoardStateBaseClass
     {
+        [SerializeField] private List<Material> _tileFronts;
         public BoardOnePreviewState(MemoryBoard board) : base(board)
         {
 

@@ -9,6 +9,7 @@ namespace Memory.View
     public class MemoryBoardView : ViewBaseClass<MemoryBoard>
     {
         GameObject _tilePrefab;
+        private List<TileView> _tileViews = new List<TileView>();
 
         // Start is called before the first frame update
 
@@ -34,7 +35,28 @@ namespace Memory.View
         {
             Model = model;
             _tilePrefab = tilePrefab;
-            SpawnTiles();
+
+            float xOffset = model.Rows / 2;
+            float yOffset = model.Columns / 2;
+            float distance = 3f;
+
+            foreach (Tile tile in model.Tiles)
+            {
+                var tileView = Instantiate(tilePrefab, new Vector3((tile.Row - xOffset) * distance, 0,
+                    (tile.Column - yOffset) * distance), Quaternion.identity);
+                tileView.transform.SetParent(transform);
+
+                TileView view = tileView.GetComponent<TileView>();
+
+                if (view != null)
+                {
+                    view.Model = tile;
+                }
+
+                _tileViews.Add(view);
+            }
+
+            // SpawnTiles();
         }
     }
 }

@@ -36,7 +36,7 @@ namespace Memory.Model
             Rows = rows;
             Columns = columns;
 
-
+            State = new BoardNoPreviewState(this);
             MakeTiles();
             AssignMemoryCardIds();
         }
