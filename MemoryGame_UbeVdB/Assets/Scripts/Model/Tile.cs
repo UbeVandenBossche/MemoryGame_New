@@ -4,39 +4,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Memory.Model.States;
 
-public class Tile : ModelBaseClass
+namespace Memory.Model
 {
-    public int Row;
-    public int Column;
-
-    public MemoryBoard Board;
-    public ITileState TileState;
-    private int _memoryCardId;
-    public int MemoryCardId
+    public class Tile : ModelBaseClass
     {
-        get { return _memoryCardId; }
-        set 
+        public int Row;
+        public int Column;
+
+        public MemoryBoard Board;
+        public ITileState State;
+        private int _memoryCardId;
+        public int MemoryCardID
         {
-            if (_memoryCardId == value)
-                return;
-             _memoryCardId = value;
-            OnPropertyChanged();
+            get { return _memoryCardId; }
+            set
+            {
+                if (_memoryCardId == value)
+                    return;
+                _memoryCardId = value;
+                OnPropertyChanged();
+            }
         }
+
+
+        public Tile(int row, int column, MemoryBoard board)
+        {
+            Row = row;
+            Column = column;
+            Board = board;
+        }
+
+        public override string ToString()
+        {
+            return $"Tile({Row},{Column})";
+        }
+
+        public void SetState(ITileState state)
+        {
+
+        }
+
+
     }
-
-
-    public Tile(int row, int column, MemoryBoard board)
-    {
-        Row = row;
-        Column = column;
-        Board = board;
-    }
-
-    public override string ToString()
-    {
-        return $"Tile({Row},{Column})";
-    }
-
-
 }

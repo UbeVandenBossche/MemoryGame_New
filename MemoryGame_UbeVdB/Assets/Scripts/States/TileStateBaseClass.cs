@@ -3,12 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Memory.Models.States
+
+namespace Memory.Model.States
 {
-    public class TileStateBaseClass : ITileState
+    public abstract class TileStateBaseClass : ITileState
     {
-        protected TileStates _state;
-        public TileStates state { get => _state; }
+        public abstract TileStates TileState
+        {
+            get;
+        }
 
         protected Tile _tileReference;
         public Tile TileReference { get => _tileReference; }

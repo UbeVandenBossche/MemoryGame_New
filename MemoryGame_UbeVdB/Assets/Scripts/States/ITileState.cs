@@ -2,11 +2,13 @@ using Memory.Model.States;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public interface ITileState 
+namespace Memory.Model.States
 {
-    public TileStates state { get; }
+    public interface ITileState
+    {
+        public TileStates TileState { get; }
 
-    public Tile TileReference { get; }
+        public Tile TileReference { get; }
 
+    }
 }

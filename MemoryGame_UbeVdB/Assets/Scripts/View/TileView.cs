@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Memory.Model;
+
+
 namespace Memory.View
 {
     public class TileView : ViewBaseClass<Tile>, IPointerDownHandler

@@ -1,4 +1,5 @@
 using Memory.Model;
+using Memory.Model.States;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,17 +17,17 @@ namespace Memory.Model
         public List<Tile> Tiles = new List<Tile>();
         public List<Tile> PreviewingTiles = new List<Tile>();
 
-
+        public IBoardState State;
         private bool _isCombinationFound;
         public bool IsCombinationFound
         {
-            get { return _isCombinationFound; }
-            set
+            get
             {
-                if (_isCombinationFound == value)
-                    return;
-                _isCombinationFound = value;
-                OnPropertyChanged();
+                if (PreviewingTiles[0].MemoryCardID == PreviewingTiles[1].MemoryCardID)
+                {
+                    return true;
+                }
+                return false;
             }
         }
 
@@ -73,8 +74,8 @@ namespace Memory.Model
                     //Tiles[FindIndexTiles(Tiles, remainingTiles[number1])].MemoryCardId = cycleNumber;
                     //Tiles[FindIndexTiles(Tiles, remainingTiles[number2])].MemoryCardId = cycleNumber;
 
-                    remainingTiles[number1].MemoryCardId = cycleNumber;
-                    remainingTiles[number2].MemoryCardId = cycleNumber;
+                    remainingTiles[number1].MemoryCardID = cycleNumber;
+                    remainingTiles[number2].MemoryCardID = cycleNumber;
 
                     if (number1 > number2)
                     {
@@ -89,7 +90,7 @@ namespace Memory.Model
                 }
                 else
                 {
-                    remainingTiles[0].MemoryCardId = cycleNumber;
+                    remainingTiles[0].MemoryCardID = cycleNumber;
                     remainingTiles.RemoveAt(0);
                 }
                 cycleNumber++;

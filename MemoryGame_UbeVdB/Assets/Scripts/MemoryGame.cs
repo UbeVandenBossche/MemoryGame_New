@@ -54,7 +54,7 @@ namespace Memory.View
             {
                 foreach (Tile tile in _board.Tiles)
                 {
-                    tile.MemoryCardId++;
+                    tile.MemoryCardID++;
                     //Debug.Log(tile.MemoryCardId);
                 }
                 _timer = 0;
