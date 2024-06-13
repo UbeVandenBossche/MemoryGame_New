@@ -7,7 +7,7 @@ namespace Memory.Model.States
     {
         public BoardTwoFoundState(MemoryBoard board) : base(board)
         {
-            //board.Players[board.ActivePlayer].Score++;
+            board.Players[board.ActivePlayer].Score++;
         }
 
        public override BoardStates BoardState => BoardStates.TwoFound;

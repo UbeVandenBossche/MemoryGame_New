@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Memory.Model;
 using System.Threading;
+using TMPro;
 
 namespace Memory.View
 {
@@ -10,8 +11,11 @@ namespace Memory.View
     public class MemoryGame : MonoBehaviour
     {
         private MemoryBoard _board;
+        [SerializeField] private int _playerCount = 2;
+        [SerializeField] private TextMeshProUGUI _restartText;
 
         [SerializeField] GameObject _boardView;
+        [SerializeField] GameObject _playerPrefab;
         [SerializeField] GameObject _tilePrefab;
 
         private float _timer = 0;
@@ -25,8 +29,21 @@ namespace Memory.View
                .SetUpMemoryBoardView(_board, _tilePrefab);
 
 
+            List<Player> players = new List<Player>();
 
-
+            for (int i = 0; i < _playerCount; i++)
+            {
+                GameObject player = GameObject.Instantiate(_playerPrefab);
+                PlayerView pv = player.GetComponent<PlayerView>();
+                pv.Model = new Player();
+                pv.Model.Name = $"Player {i + 1}";
+                pv.Model.Score = 0;
+                pv.Model.IsActive = i == 0;
+                pv.Model.ElapsedTime = 0;
+                pv.PlayerInfo.rectTransform.position = new Vector3(200, Screen.height / 2 - i * 200, 0);
+                players.Add(pv.Model);
+            }
+            _boardView.GetComponent<MemoryBoardView>().Model.Players = players;
 
             foreach (Tile tile in _board.Tiles)
             {

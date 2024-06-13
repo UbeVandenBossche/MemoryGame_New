@@ -7,24 +7,24 @@ namespace Memory.Model.States
     {
         public BoardNoPreviewState(MemoryBoard board) : base(board)
         {
-            //if (board.Players != null && board.Players.Count > 0)
-            //{
-            //    board.ActivePlayer += 1;
-            //    if (board.ActivePlayer >= board.Players.Count)
-            //    {
-            //        board.ActivePlayer = 0;
-            //    }
+            if (board.Players != null && board.Players.Count > 0)
+            {
+                board.ActivePlayer += 1;
+                if (board.ActivePlayer >= board.Players.Count)
+                {
+                    board.ActivePlayer = 0;
+                }
 
-            //    foreach (Player player in board.Players)
-            //    {
-            //        player.IsActive = false;
-            //    }
+                foreach (Player player in board.Players)
+                {
+                    player.IsActive = false;
+                }
 
-            //    if (board.Players.Count > 0)
-            //    {
-            //        board.Players[board.ActivePlayer].IsActive = true;
-            //    }
-            //}
+                if (board.Players.Count > 0)
+                {
+                    board.Players[board.ActivePlayer].IsActive = true;
+                }
+            }
 
             Board.PreviewingTiles = new List<Tile>();
         }

@@ -17,6 +17,9 @@ namespace Memory.Model
         public List<Tile> Tiles = new List<Tile>();
         public List<Tile> PreviewingTiles = new List<Tile>();
 
+        public List<Player> Players = new List<Player>();
+        public int ActivePlayer = 0;
+
         public IBoardState State;
         private bool _isCombinationFound;
         public bool IsCombinationFound
@@ -38,7 +41,7 @@ namespace Memory.Model
 
             State = new BoardNoPreviewState(this);
             MakeTiles();
-            AssignMemoryCardIds();
+            AssignMemoryCardIDs(9);
         }
 
         private void MakeTiles()
@@ -53,7 +56,7 @@ namespace Memory.Model
             }
         }
 
-        private void AssignMemoryCardIds()
+        public void AssignMemoryCardIDs(int count)
         {
             List<Tile> remainingTiles = new List<Tile>(Tiles);
             Random rnd = new Random();

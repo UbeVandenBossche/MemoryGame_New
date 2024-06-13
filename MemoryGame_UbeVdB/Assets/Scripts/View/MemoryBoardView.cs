@@ -4,6 +4,8 @@ using UnityEngine;
 using Memory.Model;
 using System.ComponentModel;
 using System;
+using UnityEngine.Networking;
+
 namespace Memory.View
 {
     public class MemoryBoardView : ViewBaseClass<MemoryBoard>
@@ -56,7 +58,42 @@ namespace Memory.View
                 _tileViews.Add(view);
             }
 
+           // StartCoroutine(AssignIDs(model));
             // SpawnTiles();
+        }
+
+        private IEnumerator AssignIDs(MemoryBoard board)
+        {
+            UnityWebRequest uwr = UnityWebRequest.Get("http://localhost:80/MemoryGame/api/MemoryGame/");
+
+            yield return uwr.SendWebRequest();
+
+            Debug.Log(uwr.downloadHandler.text);
+
+            int count = 5;
+
+            if (uwr.result != UnityWebRequest.Result.Success)
+            {
+                Debug.Log(uwr.error);
+            }
+            else
+            {
+                if (!int.TryParse(uwr.downloadHandler.text, out count))
+                {
+                    Debug.Log("Couldn't parse count");
+                }
+            }
+            board.AssignMemoryCardIDs(count);
+        }
+
+        public MemoryBoardView SetTileMaterials(List<Material> materials)
+        {
+            foreach (TileView tileView in _tileViews)
+            {
+                tileView.CardFrontRenderer.material = (materials[tileView.Model.MemoryCardID]);
+            }
+
+            return this;
         }
     }
 }
