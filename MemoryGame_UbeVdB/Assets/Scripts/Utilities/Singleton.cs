@@ -1,28 +1,19 @@
-using UnityEngine;
 using System;
-using Random = System.Random;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
-namespace Memory.Utilities
+public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
+    private static readonly Lazy<T> LazyInstance = new Lazy<T>(CreateSingleton);
 
-    public static class ExtensionMethods
+    public static T Instance => LazyInstance.Value;
+
+    private static T CreateSingleton()
     {
-       private static Random _random = new Random();
-        public static List<T> Shuffle<T>(this List<T> original)
-        {
-            List<T> shallowInputClone = new List<T>(original);
-            List<T> result = new List<T>(shallowInputClone.Count);
-
-            while(shallowInputClone.Count > 0)
-            {
-                int index = _random.Next(0,shallowInputClone.Count);
-                result.Add(shallowInputClone[index]);
-                shallowInputClone.RemoveAt(index);
-
-            }
-            return result;
-        }
-
+        var ownerObject = new GameObject($"{typeof(T).Name} (singleton)");
+        var instance = ownerObject.AddComponent<T>();
+        DontDestroyOnLoad(ownerObject);
+        return instance;
     }
 }

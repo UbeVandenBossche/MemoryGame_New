@@ -61,7 +61,7 @@ namespace Memory.View
 
         private void LoadFront(Texture2D texture2D)
         {
-            //CardFrontRenderer.material.mainTexture = texture2D;
+            CardFrontRenderer.material.mainTexture = texture2D;
         }
 
 
