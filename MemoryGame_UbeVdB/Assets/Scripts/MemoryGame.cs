@@ -45,24 +45,7 @@ namespace Memory.View
             }
             _boardView.GetComponent<MemoryBoardView>().Model.Players = players;
 
-            foreach (Tile tile in _board.Tiles)
-            {
-               // Debug.Log(tile.MemoryCardId);
-            }
-           // GameObject board = Instantiate(_boardView);
-          
-
-            //board.transform.position = new Vector3(-_board.Rows*1.5f, 0, -_board.Columns * 1.5f );
-
-            //if (board.TryGetComponent<MemoryBoardView>( out var bV))
-            //{
-            //    Debug.Log(_board);
-            //     bV.SetUpMemoryBoardView(_board,_tilePrefab);
-            //}
-            //else
-            //{
-            //    Debug.Log("FAlse");
-            //}
+           
             
         }
 

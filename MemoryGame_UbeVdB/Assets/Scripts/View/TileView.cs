@@ -56,7 +56,7 @@ namespace Memory.View
         }
         private void LoadFront()
         {
-            //ImageRepository.Instance.GetProcessTexture(Model.MemoryCardID, LoadFront);
+            ImageRepository.Instance.GetProcessTexture(Model.MemoryCardID, LoadFront);
         }
 
         private void LoadFront(Texture2D texture2D)
