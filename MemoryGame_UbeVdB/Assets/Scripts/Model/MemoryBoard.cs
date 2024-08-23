@@ -41,7 +41,7 @@ namespace Memory.Model
 
             State = new BoardNoPreviewState(this);
             MakeTiles();
-            AssignMemoryCardIDs(9);
+           // AssignMemoryCardIDs();
         }
 
         private void MakeTiles()
@@ -56,7 +56,7 @@ namespace Memory.Model
             }
         }
 
-        public void AssignMemoryCardIDs(int count)
+        public void AssignMemoryCardIDss(int count)
         {
             List<Tile> remainingTiles = new List<Tile>(Tiles);
             Random rnd = new Random();
@@ -101,6 +101,48 @@ namespace Memory.Model
 
            
 
+        }
+
+        public void AssignMemoryCardIDs(List<int> memoryCardIDs)
+        {
+            bool sameIDPossible = false;
+            //memoryCardIDs = memoryCardIDs.Shuffle();
+            //List<Tile> shuffledTiles = Tiles.Shuffle();
+
+            Random random = new Random();
+            List<Tile> _tempTiles = new List<Tile>(Tiles);
+            List<int> _tempMemoryCardIDs = memoryCardIDs;
+
+            //for (int i = 0; i < memoryCardIDs; i++)
+            //{
+            //    _tempMemoryCardIDs.Add(i);
+            //}
+
+            while (_tempTiles.Count > 0)
+            {
+                if (_tempTiles.Count == 1)
+                {
+                    _tempTiles[0].MemoryCardID = _tempMemoryCardIDs[random.Next(0, _tempMemoryCardIDs.Count)];
+                    _tempTiles.Remove(_tempTiles[0]);
+                }
+                else
+                {
+                    Tile tempTile1 = _tempTiles[random.Next(0, _tempTiles.Count)];
+                    _tempTiles.Remove(tempTile1);
+                    Tile tempTile2 = _tempTiles[random.Next(0, _tempTiles.Count)];
+                    _tempTiles.Remove(tempTile2);
+
+
+                    int randomMemoryID = _tempMemoryCardIDs[random.Next(0, _tempMemoryCardIDs.Count)];
+                    tempTile1.MemoryCardID = randomMemoryID;
+                    tempTile2.MemoryCardID = randomMemoryID;
+
+                    if (!sameIDPossible)
+                    {
+                        _tempMemoryCardIDs.Remove(randomMemoryID);
+                    }
+                }
+            }
         }
         private int FindIndexTiles(List<Tile> list1, Tile tile)
         {

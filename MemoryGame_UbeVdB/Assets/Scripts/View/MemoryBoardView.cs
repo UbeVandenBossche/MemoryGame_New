@@ -5,6 +5,7 @@ using Memory.Model;
 using System.ComponentModel;
 using System;
 using UnityEngine.Networking;
+using Newtonsoft.Json;
 
 namespace Memory.View
 {
@@ -58,19 +59,20 @@ namespace Memory.View
                 _tileViews.Add(view);
             }
 
-            // StartCoroutine(AssignIDs(model));
+            StartCoroutine(AssignIDs(model));
             // SpawnTiles();
         }
 
         private IEnumerator AssignIDs(MemoryBoard board)
         {
-            UnityWebRequest uwr = UnityWebRequest.Get("http://localhost:80/MemoryGame/api/MemoryGame/");
+            UnityWebRequest uwr = UnityWebRequest.Get("https://localhost:7023/api/Memory");
 
             yield return uwr.SendWebRequest();
 
             Debug.Log(uwr.downloadHandler.text);
 
-            int count = 5;
+            //int count = 5;
+            List<int> ids = new List<int>();
 
             if (uwr.result != UnityWebRequest.Result.Success)
             {
@@ -78,12 +80,21 @@ namespace Memory.View
             }
             else
             {
-                if (!int.TryParse(uwr.downloadHandler.text, out count))
-                {
-                    Debug.Log("Couldn't parse count");
-                }
+                //if (!int.TryParse(uwr.downloadHandler.text, out count))
+                //{
+                //    Debug.Log("Couldn't parse count");
+                //}
+                
+                ids = JsonConvert.DeserializeObject<List<int>>(uwr.downloadHandler.text);
+
             }
-            board.AssignMemoryCardIDs(count);
+
+
+            if(ids.Count <= 0)
+            {
+                Debug.Log("List empty");
+            }
+            board.AssignMemoryCardIDs(ids);
         }
 
         public MemoryBoardView SetTileMaterials(List<Material> materials)
