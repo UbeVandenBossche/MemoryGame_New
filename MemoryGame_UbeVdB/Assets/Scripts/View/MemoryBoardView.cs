@@ -65,7 +65,7 @@ namespace Memory.View
 
         private IEnumerator AssignIDs(MemoryBoard board)
         {
-            UnityWebRequest uwr = UnityWebRequest.Get("https://localhost:7023/api/Memory");
+            UnityWebRequest uwr = UnityWebRequest.Get("http://www.memorygame.edu/MemoryService/api/Memory");
 
             yield return uwr.SendWebRequest();
 

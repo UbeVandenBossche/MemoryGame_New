@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 
 public class ImageRepository : Singleton<ImageRepository>
 {
-    string urlMemoryImages = "https://localhost:7023/api/Memory";
+    string urlMemoryImages = "http://www.memorygame.edu/MemoryService/api/Memory";
 
     
 
