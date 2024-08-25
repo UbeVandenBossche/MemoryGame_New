@@ -28,7 +28,7 @@ namespace Memory.View
             _boardView.GetComponent<MemoryBoardView>()
                .SetUpMemoryBoardView(_board, _tilePrefab);
 
-            Debug.Log("fml");
+            
             List<Player> players = new List<Player>();
 
             for (int i = 0; i < _playerCount; i++)
